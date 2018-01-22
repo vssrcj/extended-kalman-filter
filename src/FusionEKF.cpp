@@ -70,8 +70,8 @@ FusionEKF::FusionEKF() {
              0, 0, 0, 1;
 
   // set the acceleration noise components
-	noise_ax = 9; // 5;
-	noise_ay = 9; // 5;
+	noise_ax = 9.; // 5;
+	noise_ay = 9.; // 5;
 }
 
 /**
@@ -105,7 +105,7 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
       float phi     = measurement_pack.raw_measurements_(1);
       float rho_dot = measurement_pack.raw_measurements_(2);
     
-      ekf_.x_ << rho * cos(phi), rho * sin(phi), rho_dot * cos(phi), rho_dot * sin(phi);
+      ekf_.x_ << rho * cos(phi), rho * sin(phi), 0.f, 0.f; // , rho_dot * cos(phi), rho_dot * sin(phi);
     }
     else if (measurement_pack.sensor_type_ == MeasurementPackage::LASER) {
       /**
@@ -114,8 +114,10 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
       float x = measurement_pack.raw_measurements_(0);
       float y = measurement_pack.raw_measurements_(1);
 
-      ekf_.x_ << x, y, 0, 0;
+      ekf_.x_ << x, y, 0.f, 0.f;
     }
+
+    previous_timestamp_ = measurement_pack.timestamp_;
 
     // done initializing, no need to predict or update
     is_initialized_ = true;
