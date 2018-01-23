@@ -57,7 +57,7 @@ Connected!!!
 # Result.
 
 <div>
-  <img src="/images/program.png" height="400">
+  <img src="/images/program.png" height="500">
 </div>
 
 The program achieves the following RMSE score on Dataset 1:
@@ -73,28 +73,27 @@ The program achieves the following RMSE score on Dataset 1:
 
 The program performs the following steps:
 
-1. Sensor Measurements.
-
+### 1. Sensor Measurements.
 The simulator runs and provides both RADAR and LASAR measurements.
 
-2. Data Collection.
+### 2. Data Collection.
 
 **main.cpp** captures these measurements using *uWebsocketIO*.
 
-3. Initialization.
+### 3. Initialization.
 
 A **FusionEKF** instance is created, and the initialization matrices are set up.
 
-4. Predicting and Updating
+### 4. Predicting and Updating
 
 **ProcessMeasurement()** is called within **FusionEKF.cpp** which initializes the Kalman filter as well as calling the prediction and update steps of the Kalman filter, located in **kalman_filter.cpp**.
 
-5. Calculate RMSE
+### 5. Calculate RMSE
 
 **tools.cpp** calculates the RMSE and passes it back to **main.cpp**.
 
 # Measurement Process.
 
 <div>
-  <img src="/images/flow.png" height="400">
+  <img src="/images/flow.png" height="500">
 </div>
