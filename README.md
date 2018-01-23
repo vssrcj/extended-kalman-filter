@@ -4,8 +4,6 @@
 
 *made by [CJ](https://github.com/vssrcj)*
 
-![Final Result Gif](./result.gif)
-
 # Overview.
 
 This project utilizes a kalman filter to estimate the state of a moving object of interest with noisy lidar and radar measurements.
@@ -84,7 +82,7 @@ The simulator runs and provides both RADAR and LASAR measurements.
 
 A **FusionEKF** instance is created, and the initialization matrices are set up.
 
-### 4. Predicting and Updating
+### 4. Predictinon and Updating.
 
 **ProcessMeasurement()** is called within **FusionEKF.cpp** which initializes the Kalman filter as well as calling the prediction and update steps of the Kalman filter, located in **kalman_filter.cpp**.
 
@@ -97,3 +95,12 @@ A **FusionEKF** instance is created, and the initialization matrices are set up.
 <div>
   <img src="/images/flow.png" height="500">
 </div>
+
+*Simply put:*
+
+* The sensors give data about the car's surroundings.  The **RADAR** provides a velocity measurement, while the **LIDAR** has a higher resolution.
+* The EKF (Extended Kalman Filter) is an algorithm that uses these series of measurements over time to produce predictions.
+* Firstly, the EKF is initialized.
+* When new data is received, the sensor type is determined.
+* The EKF then predicts where the location of the object will be after time Δt.
+* The state of the object is then updated based on the prediction and the measurement.  The EKF will put more weight on either the prediction or the measurement based on their respective uncertainties.
